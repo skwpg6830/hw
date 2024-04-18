@@ -6,6 +6,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <style>
+        .box{
+            position: relative;
+            width: 600px;
+            height: 600px;
+            /* margin: auto; */
+            background: palegoldenrod;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            border-radius: 50%;
+            /* margin-top: 30%; */
+        }
         #clock {
             width: 300px;
             height: 300px;
@@ -13,7 +26,20 @@
             border: 1px solid black;
             border-radius: 50%;
             position: relative;
-            margin-top: 15%;
+            margin-top: 76%;
+            /* transform-origin: 150px -500px; */
+            transform-origin: center -500px;
+            animation: clock 2s infinite alternate ease-in-out;
+            /* animation: clock 2s infinite linear; */
+        }
+
+        #c1 {
+            width: 100px;
+            height: 500px;
+            /* background: palevioletred; */
+            position: absolute;
+            left: 33%;
+            top: -80%;
         }
 
         /* #clock::before {
@@ -42,7 +68,7 @@
         }
 
         #clock-center {
-            background: black;
+            background: white;
             width: 210px;
             height: 210px;
             border: 1px solid white;
@@ -55,7 +81,7 @@
 
         #clock-center::before {
             content: "";
-            background: skyblue;
+            background: black;
             width: 180px;
             height: 180px;
             border: 1px solid black;
@@ -68,7 +94,7 @@
 
         #clock-center::after {
             content: "";
-            background: skyblue;
+            background: white;
             width: 150px;
             height: 150px;
             border: 1px solid black;
@@ -80,7 +106,7 @@
         }
 
         #clock-center-center {
-            background: red;
+            background: black;
             width: 120px;
             height: 120px;
             border: 1px solid black;
@@ -93,7 +119,7 @@
 
         #clock-center-center::before {
             content: '';
-            background: red;
+            background: white;
             width: 90px;
             height: 90px;
             border: 1px solid black;
@@ -105,7 +131,7 @@
         }
 
         #clock-center-center-center {
-            background: yellow;
+            background: black;
             width: 60px;
             height: 60px;
             border: 1px solid black;
@@ -118,7 +144,7 @@
 
         #clock-center-center-center::before {
             content: '';
-            background: yellow;
+            background: white;
             width: 40px;
             height: 40px;
             border: 1px solid black;
@@ -131,7 +157,7 @@
 
         #clock-center-center-center::after {
             content: '';
-            background: yellow;
+            background: black;
             width: 20px;
             height: 20px;
             border: 1px solid black;
@@ -195,23 +221,37 @@
             
     }
 
-    @keyframes jump {
-      from {
-        transform: translateY(0px) rotate(0deg);
-      }
-
-      50% {
-        transform: translateY(-50px) rotate(360deg);
-      }
-
-      50.1% {
-        transform: translateY(-50px) rotate(0deg);
-      }
-
-      to {
-        transform: translateY(0px) rotate(360deg);
-      }
+    @keyframes clock {
+    0% {
+        bottom: 0;
+        left: 0%;
+        transform: rotate(90deg);
     }
+    
+    /* 25% {
+        bottom: 0;
+        left: -50%;
+        transform: translate(0%, 0%);
+    } */
+
+    /* 50% {
+        bottom: 0;
+        left: 0%;
+        transform: rotate(-180deg);
+    } */
+    
+    /* 75% {
+        bottom: 0;
+        left: 0%;
+        transform: rotate(0deg);
+    } */
+
+    100% {
+        /* bottom: 0; */
+        /* left: 0%; */
+        transform: rotate(-90deg);
+    }
+}
         .I {
             position: absolute;
             right: 24%;
@@ -323,7 +363,9 @@
 </head>
 
 <body>
+    <div class="box">
     <div id="clock">
+        <span id="c1"></span>
         <div id="clock-center"></div>
         <div id="clock-center-center"></div>
         <div id="clock-center-center-center"></div>
@@ -343,6 +385,7 @@
         <span class="XI">11</span>
         <span class="XII">12</span>
     </div>
+</div>
     <p id="text">00:00:00</p>
 
     <script>
