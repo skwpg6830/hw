@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #game{
+            width: 500px;
+            height: 500px;
+            border: 1px solid black;
+            background: black;
+            position: relative;
+            overflow: hidden;
+            cursor: url(./cursor.png) 50 50, auto;
+        }
+
+        .bullet {
+        width: 20px;
+        height: 20px;
+        background-image: url('./bullet.png');
+        background-size: contain;
+        position: absolute;
+        animation-iteration-count: infinite;
+    }
+
+    .player {
+        width: 50px;
+        height: 50px;
+        background-image: url('./player.png');
+        background-size: contain;
+        position: absolute;
+        pointer-events: none;
+    }
+
+    @keyframes move-bullet {
+        0% {
+            left: 0%;
+        }
+        100% {
+            left: 100%;
+        }
+    }
+</style>
+
+</head>
+<body>
+    <input type="button" value="開始" id="btn-start">
+    <br>
+    <p>分數: <span id="text-score">0</span></p>
+    <p>剩餘: <span id="text-time">0</span></p>
+    <p>最高分玩家: <span id="text-highscore-player">-</span></p>
+    <p>最高分分數: <span id="text-highscore-score">0</span></p>
+    <div id="game">
+        <div class="bullet"></div>
+    </div>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.js' 
+    integrity='sha512-+k1pnlgt4F1H8L7t3z95o3/KO+o78INEcXTbnoJQ/F2VqDVhWoaiVml/OEHv9HsVgxUaVW+IbiZPUJQfF/YxZw==' crossorigin='anonymous'></script>
+    <script>
+        // 分數
+        let score = 0
+        // 剩餘秒數
+        let time = 0
+        // 計時器
+        let timer = 0
+        // 最高分
+        const highscore = {
+            name: '-',
+            score: 0
+        }
+
+        if (localStorage.bulletHighScore) {
+        const data = JSON.parse(localStorage.bulletHighScore);
+        highscore.name = data.name;
+        highscore.score = data.score;
+        $('#text-highscore-player').text(highscore.name);
+        $('#text-highscore-score').text(highscore.score);
+    }
+
+    $('#btn-start').click(function () {
+        // 停用按鈕
+        $(this).attr('disabled', true);
+        // 重設
+        score = 0;
+        $('#text-score').text(score);
+        time = 60;
+        $('#text-time').text(time);
+        // 下面 setInterval 的 function 的 this 會指向到 window
+        // 所以把點擊事件的 this 放在變數裡面
+        const _this = this;
+        // 開始遊戲
+        timer = setInterval(function () {
+            // 倒數
+            time--;
+            $('#text-time').text(time);
+
+            // 隨機數字 > 5，且彈幕的數量 < 10 才出現
+            const random = Math.ceil(Math.random() * 10);
+            if (random > 5 && $('.bullet').length < 10) {
+                createBullet();
+            }
+
+            // 時間到
+            if (time === 0) {
+                clearInterval(timer);
+                // 重新啟用開始按鈕
+                $(_this).attr('disabled', false);
+                // 清空遊戲區域
+                $('#game').empty();
+                // 最高分
+                if (score > highscore.score) {
+                    const name = prompt('最高分，請輸入名字') || '-';
+                    highscore.name = name;
+                    highscore.score = score;
+
+                    $('#text-highscore-player').text(highscore.name);
+                    $('#text-highscore-score').text(highscore.score);
+
+                    // localStorage.資料名稱 = 文字
+                    // localStorage.setItem(資料名稱, 文字)
+                    localStorage.bulletHighScore = JSON.stringify(highscore);
+                }
+            }
+        }, 1000);
+    });
+
+    function createBullet() {
+        const bullet = $('<div class="bullet"></div>');
+        const top = Math.round(Math.random() * 100) + '%';
+        const left = Math.round(Math.random() * 100) + '%';
+        const direction = Math.round(Math.random()) ? 1 : -1;
+        bullet.css({
+            top,
+            left,
+            animation: `move-bullet ${Math.floor(Math.random() * 5) + 3}s linear infinite`
+        });
+        $('#game').append(bullet);
+    }
+
+    $('#game').on('click', function(e) {
+        const player = $('<div class="player"></div>');
+        player.css({
+            top: e.clientY - 25 + 'px',
+            left: e.clientX - 25 + 'px'
+        });
+        $('#game').append(player);
+        checkCollision(player);
+        // 一定時間後移除玩家角色
+        setTimeout(function() {
+            player.remove();
+        }, 500);
+    });
+
+    function checkCollision(player) {
+        const playerRect = player[0].getBoundingClientRect();
+        $('.bullet').each(function() {
+            const bulletRect = this.getBoundingClientRect();
+            if (
+                bulletRect.left <= playerRect.right &&
+                bulletRect.right >= playerRect.left &&
+                bulletRect.top <= playerRect.bottom &&
+                bulletRect.bottom >= playerRect.top
+            ) {
+                $(this).remove();
+                score++;
+                $('#text-score').text(score);
+            }
+        });
+    }
+</script>
+
+</body>
+</html>
