@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rainbow Shape</title>
+    <style>
+        .rainbow {
+            width: 300px;
+            height: 150px;
+            position: relative;
+            margin: 50px auto;
+        }
+        .arc {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border: 20px solid transparent;
+            border-radius: 50%;
+        }
+        .arc.red { border-top-color: red; }
+        .arc.orange { border-top-color: orange; top: 10px; }
+        .arc.yellow { border-top-color: yellow; top: 20px; }
+        .arc.green { border-top-color: green; top: 30px; }
+        .arc.blue { border-top-color: blue; top: 40px; }
+        .arc.indigo { border-top-color: indigo; top: 50px; }
+        .arc.violet { border-top-color: violet; top: 60px; }
+    </style>
+</head>
+<body>
+    <div class="rainbow">
+        <div class="arc red"></div>
+        <div class="arc orange"></div>
+        <div class="arc yellow"></div>
+        <div class="arc green"></div>
+        <div class="arc blue"></div>
+        <div class="arc indigo"></div>
+        <div class="arc violet"></div>
+    </div>
+</body>
+</html>

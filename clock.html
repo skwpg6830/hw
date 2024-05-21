@@ -6,12 +6,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <style>
+        body{
+            background: url(https://i.epochtimes.com/assets/uploads/2018/10/Fotolia_66581409_Subscription_L.jpg);
+        }
         .box{
-            position: relative;
             width: 600px;
             height: 600px;
             /* margin: auto; */
-            background: palegoldenrod;
             position: absolute;
             top: 50%;
             left: 50%;
@@ -19,6 +20,23 @@
             border-radius: 50%;
             /* margin-top: 30%; */
         }
+
+        .arc {
+            position: relative;
+            width: 180%;
+            height: 100%;
+            left: -45%;
+            border: 20px solid transparent;
+            border-radius: 50%;
+        }
+
+        .arc.red { border-top-color: red; top: 50px;}
+        .arc.orange { border-top-color: orange; top: -95%; }
+        .arc.yellow { border-top-color: yellow; top: -199%; }
+        .arc.green { border-top-color: green; top: -303%; }
+        .arc.blue { border-top-color: blue; top: -407%; }
+        .arc.indigo { border-top-color: indigo; top: -511%; }
+        .arc.violet { border-top-color: violet; top: -615%; }
         #clock {
             width: 300px;
             height: 300px;
@@ -26,10 +44,10 @@
             border: 1px solid black;
             border-radius: 50%;
             position: relative;
-            margin-top: 76%;
-            /* transform-origin: 150px -500px; */
+            margin-top: -668%;
+            transform-origin: 150px -500px;
             transform-origin: center -500px;
-            /* animation: clock 2s infinite alternate ease-in-out; */
+            animation: clock 2s infinite alternate ease-in-out;
             /* animation: clock 2s infinite linear; */
         }
 
@@ -55,11 +73,10 @@
         } */
 
         #clock::after {
-            background: black;
+            background: red;
             content: '';
             width: 240px;
             height: 240px;
-            border: 1px solid black;
             border-radius: 50%;
             position: absolute;
             margin-top: 10%;
@@ -68,10 +85,9 @@
         }
 
         #clock-center {
-            background: white;
+            background: orange;
             width: 210px;
             height: 210px;
-            border: 1px solid white;
             border-radius: 50%;
             position: absolute;
             margin-top: 15%;
@@ -81,10 +97,9 @@
 
         #clock-center::before {
             content: "";
-            background: black;
+            background: yellow;
             width: 180px;
             height: 180px;
-            border: 1px solid black;
             border-radius: 50%;
             position: absolute;
             margin-top: 7%;
@@ -94,10 +109,9 @@
 
         #clock-center::after {
             content: "";
-            background: white;
+            background: green;
             width: 150px;
             height: 150px;
-            border: 1px solid black;
             border-radius: 50%;
             position: absolute;
             margin-top: 14%;
@@ -106,10 +120,9 @@
         }
 
         #clock-center-center {
-            background: black;
+            background: blue;
             width: 120px;
             height: 120px;
-            border: 1px solid black;
             border-radius: 50%;
             position: absolute;
             margin-top: 30%;
@@ -119,10 +132,9 @@
 
         #clock-center-center::before {
             content: '';
-            background: white;
+            background: indigo;
             width: 90px;
             height: 90px;
-            border: 1px solid black;
             border-radius: 50%;
             position: absolute;
             margin-top: 12%;
@@ -131,7 +143,7 @@
         }
 
         #clock-center-center-center {
-            background: black;
+            background: violet;
             width: 60px;
             height: 60px;
             border: 1px solid black;
@@ -208,7 +220,7 @@
             text-align: center;
             font: 30px 微軟正黑體 italic bold;
             position: absolute;
-            color: blueviolet;
+            color: white;
             top: 65%;
             left: 50%;
             transform: translate(-50%, -50%);
@@ -258,7 +270,7 @@
             top: 3%;
             z-index: 1;
             font-size: 37px;
-            color: orange;
+            color: white;
         }
 
         .II {
@@ -267,7 +279,7 @@
             top: 19%;
             z-index: 1;
             font-size: 37px;
-            color: orange;
+            color: white;
         }
 
         .III {
@@ -276,7 +288,7 @@
             top: 43%;
             z-index: 1;
             font-size: 37px;
-            color: orange;
+            color: white;
         }
 
         .IV {
@@ -285,7 +297,7 @@
             top: 66%;
             z-index: 1;
             font-size: 37px;
-            color: orange;
+            color: white;
         }
 
         .V {
@@ -294,7 +306,7 @@
             bottom: 3%;
             z-index: 1;
             font-size: 37px;
-            color: orange;
+            color: white;
         }
 
         .VI {
@@ -303,7 +315,7 @@
             bottom: -3%;
             z-index: 1;
             font-size: 37px;
-            color: orange;
+            color: white;
         }
 
         .VII {
@@ -312,7 +324,7 @@
             bottom: 3%;
             z-index: 1;
             font-size: 37px;
-            color: orange;
+            color: white;
         }
 
         .VIII {
@@ -321,7 +333,7 @@
             bottom: 20%;
             z-index: 1;
             font-size: 37px;
-            color: orange;
+            color: white;
         }
 
         .VIV {
@@ -330,7 +342,7 @@
             bottom: 42%;
             z-index: 1;
             font-size: 37px;
-            color: orange;
+            color: white;
         }
 
         .X {
@@ -339,7 +351,7 @@
             top: 20%;
             z-index: 1;
             font-size: 37px;
-            color: orange;
+            color: white;
         }
 
         .XI {
@@ -348,7 +360,7 @@
             top: 3%;
             z-index: 1;
             font-size: 37px;
-            color: orange;
+            color: white;
         }
 
         .XII {
@@ -357,13 +369,20 @@
             top: -2%;
             z-index: 1;
             font-size: 37px;
-            color: orange;
+            color: white;
         }
     </style>
 </head>
 
 <body>
     <div class="box">
+        <div class="arc red"></div>
+        <div class="arc orange"></div>
+        <div class="arc yellow"></div>
+        <div class="arc green"></div>
+        <div class="arc blue"></div>
+        <div class="arc indigo"></div>
+        <div class="arc violet"></div>
     <div id="clock">
         <span id="c1"></span>
         <div id="clock-center"></div>
