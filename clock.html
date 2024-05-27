@@ -4,21 +4,24 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Clock</title>
     <style>
-        body{
+        body {
             background: url(https://i.epochtimes.com/assets/uploads/2018/10/Fotolia_66581409_Subscription_L.jpg);
+            font-family: 華康少女文字W5;
+            overflow: hidden;
+            margin: 0;
+            padding: 0;
         }
-        .box{
+
+        .box {
             width: 600px;
             height: 600px;
-            /* margin: auto; */
             position: absolute;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
             border-radius: 50%;
-            /* margin-top: 30%; */
         }
 
         .arc {
@@ -28,49 +31,136 @@
             left: -45%;
             border: 20px solid transparent;
             border-radius: 50%;
+            animation: fadeInOut 3s infinite;
         }
 
-        .arc.red { border-top-color: red; top: 50px;}
-        .arc.orange { border-top-color: orange; top: -95%; }
-        .arc.yellow { border-top-color: yellow; top: -199%; }
-        .arc.green { border-top-color: green; top: -303%; }
-        .arc.blue { border-top-color: blue; top: -407%; }
-        .arc.indigo { border-top-color: indigo; top: -511%; }
-        .arc.violet { border-top-color: violet; top: -615%; }
+        .arc.red {
+            border-top-color: rgba(255, 0, 0, 0.5);
+            top: 50px;
+        }
+
+        .arc.orange {
+            border-top-color: rgba(255, 165, 0, 0.5);
+            top: -95%;
+        }
+
+        .arc.yellow {
+            border-top-color: rgba(255, 255, 0, 0.5);
+            top: -199%;
+        }
+
+        .arc.green {
+            border-top-color: rgba(0, 128, 0, 0.5);
+            top: -303%;
+        }
+
+        .arc.blue {
+            border-top-color: rgba(0, 0, 255, 0.5);
+            top: -407%;
+        }
+
+        .arc.indigo {
+            border-top-color: rgba(75, 0, 130, 0.5);
+            top: -511%;
+        }
+
+        .arc.violet {
+            border-top-color: rgba(238, 130, 238, 0.5);
+            top: -615%;
+        }
+
+        @keyframes fadeInOut {
+            0%,
+            100% {
+                opacity: 0;
+            }
+
+            50% {
+                opacity: 1;
+            }
+        }
+
+        @keyframes rainbowText {
+            0% {
+                color: red;
+            }
+
+            14% {
+                color: orange;
+            }
+
+            28% {
+                color: yellow;
+            }
+
+            42% {
+                color: green;
+            }
+
+            57% {
+                color: blue;
+            }
+
+            71% {
+                color: indigo;
+            }
+
+            85% {
+                color: violet;
+            }
+
+            100% {
+                color: red;
+            }
+        }
+
+        @keyframes textFadeInOut {
+            0%,
+            100% {
+                opacity: 0;
+            }
+
+            50% {
+                opacity: 1;
+            }
+        }
+
         #clock {
             width: 300px;
             height: 300px;
             margin: auto;
-            border: 1px solid black;
+            /* border: 1px solid black; */
             border-radius: 50%;
             position: relative;
             margin-top: -668%;
-            transform-origin: 150px -500px;
-            transform-origin: center -500px;
-            animation: clock 2s infinite alternate ease-in-out;
-            /* animation: clock 2s infinite linear; */
+            transform-origin: center -200px;
+            animation: clock 5s infinite alternate ease-in-out;
         }
 
         #c1 {
             width: 100px;
             height: 500px;
-            /* background: palevioletred; */
             position: absolute;
             left: 33%;
             top: -80%;
         }
 
-        /* #clock::before {
-            content: '';
-            width: 270px;
-            height: 270px;
-            border: 1px solid black;
-            border-radius: 50%;
+        p {
+            margin-top: -50px;
+            font: 30px 微軟正黑體 italic bold;
+            text-align: center;
             position: absolute;
-            margin-top: 5%;
-            margin-left: 5%;
-            z-index: 0;
-        } */
+            color: white;
+            top: 65%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            -webkit-box-reflect: below -20px linear-gradient(transparent, rgba(0, 0, 0, 0.3));
+            text-shadow:
+                1px 1px 1px rgba(0, 0, 0, 0.5),
+                1px 1px 2px rgba(0, 0, 0, 0.3),
+                1px 1px 3px rgba(0, 0, 0, 0.1);
+            animation: rainbowText 7s infinite, textFadeInOut 1s infinite;
+        }
 
         #clock::after {
             background: red;
@@ -130,9 +220,9 @@
             z-index: 2;
         }
 
-        #clock-center-center::before {
+        #clock-center-center-center::before {
             content: '';
-            background: indigo;
+            background: white;
             width: 90px;
             height: 90px;
             border-radius: 50%;
@@ -143,7 +233,7 @@
         }
 
         #clock-center-center-center {
-            background: violet;
+            background: indigo;
             width: 60px;
             height: 60px;
             border: 1px solid black;
@@ -156,7 +246,7 @@
 
         #clock-center-center-center::before {
             content: '';
-            background: white;
+            background: violet;
             width: 40px;
             height: 40px;
             border: 1px solid black;
@@ -169,7 +259,7 @@
 
         #clock-center-center-center::after {
             content: '';
-            background: black;
+            background: white;
             width: 20px;
             height: 20px;
             border: 1px solid black;
@@ -180,7 +270,7 @@
             z-index: 2;
         }
 
-         #hour {
+        #hour {
             width: 20%;
             height: 10px;
             background: skyblue;
@@ -214,63 +304,27 @@
             border-radius: 5px;
             transform-origin: right center;
             z-index: 5;
-        } 
+        }
 
-        #text {
-            text-align: center;
-            font: 30px 微軟正黑體 italic bold;
-            position: absolute;
-            color: white;
-            top: 65%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            -webkit-box-reflect: below -20px linear-gradient(transparent, rgba(0, 0, 0, 0.3));
-            text-shadow:
-            1px 1px 1px rgba(0, 0, 0, 0.5),
-            1px 1px 2px rgba(0, 0, 0, 0.3),
-            1px 1px 3px rgba(0, 0, 0, 0.1);
-            
-            
-    }
+        @keyframes clock {
+            0% {
+                bottom: 0;
+                left: 0%;
+                transform: rotate(70deg);
+            }
 
-    @keyframes clock {
-    0% {
-        bottom: 0;
-        left: 0%;
-        transform: rotate(90deg);
-    }
-    
-    /* 25% {
-        bottom: 0;
-        left: -50%;
-        transform: translate(0%, 0%);
-    } */
+            100% {
+                transform: rotate(-70deg);
+            }
+        }
 
-    /* 50% {
-        bottom: 0;
-        left: 0%;
-        transform: rotate(-180deg);
-    } */
-    
-    /* 75% {
-        bottom: 0;
-        left: 0%;
-        transform: rotate(0deg);
-    } */
-
-    100% {
-        /* bottom: 0; */
-        /* left: 0%; */
-        transform: rotate(-90deg);
-    }
-}
         .I {
             position: absolute;
             right: 24%;
             top: 3%;
             z-index: 1;
             font-size: 37px;
-            color: white;
+            color: rgba(255, 255, 255, 0.2);
         }
 
         .II {
@@ -279,7 +333,7 @@
             top: 19%;
             z-index: 1;
             font-size: 37px;
-            color: white;
+            color: rgba(255, 255, 255, 0.2);
         }
 
         .III {
@@ -288,7 +342,7 @@
             top: 43%;
             z-index: 1;
             font-size: 37px;
-            color: white;
+            color: rgba(255, 255, 255, 0.2);
         }
 
         .IV {
@@ -297,7 +351,7 @@
             top: 66%;
             z-index: 1;
             font-size: 37px;
-            color: white;
+            color: rgba(255, 255, 255, 0.2);
         }
 
         .V {
@@ -306,25 +360,25 @@
             bottom: 3%;
             z-index: 1;
             font-size: 37px;
-            color: white;
+            color: rgba(255, 255, 255, 0.2);
         }
 
         .VI {
             position: absolute;
-            right: 47%;
-            bottom: -3%;
+            right: 46%;
+            bottom: -2%;
             z-index: 1;
             font-size: 37px;
-            color: white;
+            color: rgba(255, 255, 255, 0.2);
         }
 
         .VII {
             position: absolute;
-            left: 24%;
-            bottom: 3%;
+            left: 23%;
+            bottom: 4%;
             z-index: 1;
             font-size: 37px;
-            color: white;
+            color: rgba(255, 255, 255, 0.2);
         }
 
         .VIII {
@@ -333,7 +387,7 @@
             bottom: 20%;
             z-index: 1;
             font-size: 37px;
-            color: white;
+            color: rgba(255, 255, 255, 0.2);
         }
 
         .VIV {
@@ -342,16 +396,16 @@
             bottom: 42%;
             z-index: 1;
             font-size: 37px;
-            color: white;
+            color: rgba(255, 255, 255, 0.2);
         }
 
         .X {
             position: absolute;
-            left: 5%;
-            top: 20%;
+            left: 4%;
+            top: 19%;
             z-index: 1;
             font-size: 37px;
-            color: white;
+            color: rgba(255, 255, 255, 0.2);
         }
 
         .XI {
@@ -360,7 +414,7 @@
             top: 3%;
             z-index: 1;
             font-size: 37px;
-            color: white;
+            color: rgba(255, 255, 255, 0.2);
         }
 
         .XII {
@@ -369,7 +423,35 @@
             top: -2%;
             z-index: 1;
             font-size: 37px;
-            color: white;
+            color: rgba(255, 255, 255, 0.2);
+        }
+
+        .bird {
+            position: absolute;
+            top: 30%;
+            left: -10%;
+            width: 100px;
+            animation: flyBird 20s infinite linear;
+        }
+
+        @keyframes flyBird {
+            0% { left: -10%; transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(10deg); }
+            100% { left: 110%; transform: translateY(0) rotate(0deg); }
+        }
+
+        .plane {
+            position: absolute;
+            top: 10%;
+            right: -10%;
+            width: 150px;
+            animation: flyPlane 10s infinite linear;
+        }
+
+        @keyframes flyPlane {
+            0% { right: -10%; transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(30px) rotate(-5deg); }
+            100% { right: 110%; transform: translateY(0) rotate(0deg); }
         }
     </style>
 </head>
@@ -383,49 +465,51 @@
         <div class="arc blue"></div>
         <div class="arc indigo"></div>
         <div class="arc violet"></div>
-    <div id="clock">
-        <span id="c1"></span>
-        <div id="clock-center"></div>
-        <div id="clock-center-center"></div>
-        <div id="clock-center-center-center"></div>
-        <div id="hour"></div>
-        <div id="minute"></div>
-        <div id="second"></div>
-        <span class="I">1</span>
-        <span class="II">2</span>
-        <span class="III">3</span>
-        <span class="IV">4</span>
-        <span class="V">5</span>
-        <span class="VI">6</span>
-        <span class="VII">7</span>
-        <span class="VIII">8</span>
-        <span class="VIV">9</span>
-        <span class="X">10</span>
-        <span class="XI">11</span>
-        <span class="XII">12</span>
+        <div id="clock">
+            <span id="c1"></span>
+            <div id="clock-center"></div>
+            <div id="clock-center-center"></div>
+            <div id="clock-center-center-center"></div>
+            <div id="hour"></div>
+            <div id="minute"></div>
+            <div id="second"></div>
+            <span class="I">1</span>
+            <span class="II">2</span>
+            <span class="III">3</span>
+            <span class="IV">4</span>
+            <span class="V">5</span>
+            <span class="VI">6</span>
+            <span class="VII">7</span>
+            <span class="VIII">8</span>
+            <span class="VIV">9</span>
+            <span class="X">10</span>
+            <span class="XI">11</span>
+            <span class="XII">12</span>
+        </div>
     </div>
-</div>
     <p id="text">00:00:00</p>
+    <img src="./clock/bird.png" class="bird">
+    <img src="./clock/plane.png" class="plane">
 
     <script>
-        const elHour = document.getElementById('hour')
-        const elMinute = document.getElementById('minute')
-        const elSecond = document.getElementById('second')
-        const elText = document.getElementById('text')
+        const elHour = document.getElementById('hour');
+        const elMinute = document.getElementById('minute');
+        const elSecond = document.getElementById('second');
+        const elText = document.getElementById('text');
 
         const clock = () => {
-            const date = new Date()
-            const hour = date.getHours()
-            const minute = date.getUTCMinutes()
-            const second = date.getSeconds()
-            elHour.style.transform = `rotate(${hour * 30 + 90}deg)`
-            elMinute.style.transform = `rotate(${minute * 6 + 90}deg)`
-            elSecond.style.transform = `rotate(${second * 6 + 90}deg)`
-            elText.innerText = `${hour.toString().padStart(2, '0')}:${minute.toString().padStart(2, '0')}:${second.toString().padStart(2, '0')}`
-        }
+            const date = new Date();
+            const hour = date.getHours();
+            const minute = date.getMinutes();
+            const second = date.getSeconds();
+            elHour.style.transform = `rotate(${hour * 30 + 90}deg)`;
+            elMinute.style.transform = `rotate(${minute * 6 + 90}deg)`;
+            elSecond.style.transform = `rotate(${second * 6 + 90}deg)`;
+            elText.innerText = `${hour.toString().padStart(2, '0')}:${minute.toString().padStart(2, '0')}:${second.toString().padStart(2, '0')}`;
+        };
 
-        setInterval(clock, 1000)
-        clock()
+        setInterval(clock, 1000);
+        clock();
     </script>
 </body>
 
