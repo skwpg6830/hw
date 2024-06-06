@@ -4,11 +4,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Clock</title>
+    <title>Clock with Rain Effect</title>
     <style>
         body {
             background: url(./clock/背景.jpg);
-            font-family: 華康文徵明體W4;
+            background-size: cover;
+            font-family: '華康文徵明體W4', sans-serif;
             overflow: hidden;
             margin: 0;
             padding: 0;
@@ -24,6 +25,24 @@
             border-radius: 50%;
         }
 
+        /* 雨滴樣式 */
+        .raindrop {
+            position: absolute;
+            background: rgba(255, 255, 255, 0.5);
+            width: 2px;
+            height: 10px;
+            bottom: 100%;
+            animation: fall linear infinite;
+            pointer-events: none;
+        }
+
+        @keyframes fall {
+            to {
+                transform: translateY(100vh);
+            }
+        }
+
+        /* 其他現有樣式 */
         .arc {
             position: relative;
             width: 180%;
@@ -31,7 +50,7 @@
             left: -45%;
             border: 20px solid transparent;
             border-radius: 50%;
-            animation: fadeInOut 3s infinite;
+            opacity: 0;
         }
 
         .arc.red {
@@ -69,14 +88,12 @@
             top: -615%;
         }
 
-        @keyframes fadeInOut {
-            0%,
-            100% {
+        @keyframes rainbowFade {
+            0% {
                 opacity: 0;
             }
-
-            50% {
-                opacity: 1;
+            100% {
+                opacity: 0.5;
             }
         }
 
@@ -129,12 +146,9 @@
             width: 300px;
             height: 300px;
             margin: auto;
-            /* border: 1px solid black; */
             border-radius: 50%;
             position: relative;
             margin-top: -668%;
-            transform-origin: center -200px;
-            animation: clock 5s infinite alternate ease-in-out;
         }
 
         #c1 {
@@ -162,118 +176,10 @@
             animation: rainbowText 7s infinite, textFadeInOut 1s infinite;
         }
 
-        #clock::after {
-            background: red;
-            content: '';
-            width: 240px;
-            height: 240px;
-            border-radius: 50%;
-            position: absolute;
-            margin-top: 10%;
-            margin-left: 10%;
-            z-index: 0;
-        }
-
-        #clock-center {
-            background: orange;
-            width: 210px;
-            height: 210px;
-            border-radius: 50%;
-            position: absolute;
-            margin-top: 15%;
-            margin-left: 15%;
-            z-index: 1;
-        }
-
-        #clock-center::before {
-            content: "";
-            background: yellow;
-            width: 180px;
-            height: 180px;
-            border-radius: 50%;
-            position: absolute;
-            margin-top: 7%;
-            margin-left: 7%;
-            z-index: 2;
-        }
-
-        #clock-center::after {
-            content: "";
-            background: green;
-            width: 150px;
-            height: 150px;
-            border-radius: 50%;
-            position: absolute;
-            margin-top: 14%;
-            margin-left: 14%;
-            z-index: 2;
-        }
-
-        #clock-center-center {
-            background: blue;
-            width: 120px;
-            height: 120px;
-            border-radius: 50%;
-            position: absolute;
-            margin-top: 30%;
-            margin-left: 30%;
-            z-index: 2;
-        }
-
-        #clock-center-center-center::before {
-            content: '';
-            background: white;
-            width: 90px;
-            height: 90px;
-            border-radius: 50%;
-            position: absolute;
-            margin-top: 12%;
-            margin-left: 12%;
-            z-index: 2;
-        }
-
-        #clock-center-center-center {
-            background: indigo;
-            width: 60px;
-            height: 60px;
-            border: 1px solid black;
-            border-radius: 50%;
-            position: absolute;
-            margin-top: 40%;
-            margin-left: 40%;
-            z-index: 2;
-        }
-
-        #clock-center-center-center::before {
-            content: '';
-            background: violet;
-            width: 40px;
-            height: 40px;
-            border: 1px solid black;
-            border-radius: 50%;
-            position: absolute;
-            margin-top: 15%;
-            margin-left: 15%;
-            z-index: 2;
-        }
-
-        #clock-center-center-center::after {
-            content: '';
-            background: white;
-            width: 20px;
-            height: 20px;
-            border: 1px solid black;
-            border-radius: 50%;
-            position: absolute;
-            margin-top: 30%;
-            margin-left: 30%;
-            z-index: 2;
-        }
-
         #hour {
             width: 20%;
             height: 10px;
-            background: skyblue;
+            background: red;
             position: absolute;
             left: 30%;
             top: calc(50% - 5px);
@@ -285,7 +191,7 @@
         #minute {
             width: 30%;
             height: 10px;
-            background-color: purple;
+            background-color: green;
             position: absolute;
             left: 20%;
             top: calc(50% - 5px);
@@ -297,7 +203,7 @@
         #second {
             width: 40%;
             height: 4px;
-            background-color: lawngreen;
+            background-color: blue;
             position: absolute;
             left: 10%;
             top: calc(50% - 2px);
@@ -306,25 +212,13 @@
             z-index: 5;
         }
 
-        @keyframes clock {
-            0% {
-                bottom: 0;
-                left: 0%;
-                transform: rotate(70deg);
-            }
-
-            100% {
-                transform: rotate(-70deg);
-            }
-        }
-
         .I {
             position: absolute;
-            right: 24%;
+            right: 23%;
             top: 3%;
             z-index: 1;
             font-size: 37px;
-            color: rgba(255, 255, 255, 0.2);
+            color: rgba(255, 255, 255, 0.8);
         }
 
         .II {
@@ -333,7 +227,7 @@
             top: 19%;
             z-index: 1;
             font-size: 37px;
-            color: rgba(255, 255, 255, 0.2);
+            color: rgba(255, 255, 255, 0.8);
         }
 
         .III {
@@ -342,7 +236,7 @@
             top: 43%;
             z-index: 1;
             font-size: 37px;
-            color: rgba(255, 255, 255, 0.2);
+            color: rgba(255, 255, 255, 0.8);
         }
 
         .IV {
@@ -351,7 +245,7 @@
             top: 66%;
             z-index: 1;
             font-size: 37px;
-            color: rgba(255, 255, 255, 0.2);
+            color: rgba(255, 255, 255, 0.8);
         }
 
         .V {
@@ -360,7 +254,7 @@
             bottom: 3%;
             z-index: 1;
             font-size: 37px;
-            color: rgba(255, 255, 255, 0.2);
+            color: rgba(255, 255, 255, 0.8);
         }
 
         .VI {
@@ -369,7 +263,7 @@
             bottom: -2%;
             z-index: 1;
             font-size: 37px;
-            color: rgba(255, 255, 255, 0.2);
+            color: rgba(255, 255, 255, 0.8);
         }
 
         .VII {
@@ -378,25 +272,25 @@
             bottom: 4%;
             z-index: 1;
             font-size: 37px;
-            color: rgba(255, 255, 255, 0.2);
+            color: rgba(255, 255, 255, 0.8);
         }
 
         .VIII {
             position: absolute;
-            left: 7%;
-            bottom: 20%;
+            left: 6%;
+            bottom: 21%;
             z-index: 1;
             font-size: 37px;
-            color: rgba(255, 255, 255, 0.2);
+            color: rgba(255, 255, 255, 0.8);
         }
 
         .VIV {
             position: absolute;
             left: 2%;
-            bottom: 42%;
+            bottom: 45%;
             z-index: 1;
             font-size: 37px;
-            color: rgba(255, 255, 255, 0.2);
+            color: rgba(255, 255, 255, 0.8);
         }
 
         .X {
@@ -405,7 +299,7 @@
             top: 19%;
             z-index: 1;
             font-size: 37px;
-            color: rgba(255, 255, 255, 0.2);
+            color: rgba(255, 255, 255, 0.8);
         }
 
         .XI {
@@ -414,7 +308,7 @@
             top: 3%;
             z-index: 1;
             font-size: 37px;
-            color: rgba(255, 255, 255, 0.2);
+            color: rgba(255, 255, 255, 0.8);
         }
 
         .XII {
@@ -423,7 +317,7 @@
             top: -2%;
             z-index: 1;
             font-size: 37px;
-            color: rgba(255, 255, 255, 0.2);
+            color: rgba(255, 255, 255, 0.8);
         }
 
         .bird {
@@ -435,9 +329,19 @@
         }
 
         @keyframes flyBird {
-            0% { left: -10%; transform: translateY(0) rotate(0deg); }
-            50% { transform: translateY(-20px) rotate(10deg); }
-            100% { left: 110%; transform: translateY(0) rotate(0deg); }
+            0% {
+                left: -10%;
+                transform: translateY(0) rotate(0deg);
+            }
+
+            50% {
+                transform: translateY(-20px) rotate(10deg);
+            }
+
+            100% {
+                left: 110%;
+                transform: translateY(0) rotate(0deg);
+            }
         }
 
         .plane {
@@ -449,9 +353,19 @@
         }
 
         @keyframes flyPlane {
-            0% { right: -10%; transform: translateY(0) rotate(0deg); }
-            50% { transform: translateY(30px) rotate(-5deg); }
-            100% { right: 110%; transform: translateY(0) rotate(0deg); }
+            0% {
+                right: -10%;
+                transform: translateY(0) rotate(0deg);
+            }
+
+            50% {
+                transform: translateY(30px) rotate(-5deg);
+            }
+
+            100% {
+                right: 110%;
+                transform: translateY(0) rotate(0deg);
+            }
         }
     </style>
 </head>
@@ -496,7 +410,8 @@
         const elMinute = document.getElementById('minute');
         const elSecond = document.getElementById('second');
         const elText = document.getElementById('text');
-
+        const arcs = document.querySelectorAll('.arc');
+    
         const clock = () => {
             const date = new Date();
             const hour = date.getHours();
@@ -507,10 +422,63 @@
             elSecond.style.transform = `rotate(${second * 6 + 90}deg)`;
             elText.innerText = `${hour.toString().padStart(2, '0')}:${minute.toString().padStart(2, '0')}:${second.toString().padStart(2, '0')}`;
         };
-
+    
         setInterval(clock, 1000);
         clock();
+    
+        // 創建雨滴
+        const createRainDrop = () => {
+            const drop = document.createElement('div');
+            drop.className = 'raindrop';
+            drop.style.left = Math.random() * 100 + 'vw';
+            drop.style.animationDuration = 2 + Math.random() * 2 + 's';
+            document.body.appendChild(drop);
+    
+            setTimeout(() => {
+                drop.remove();
+            }, 4000); // 動畫結束後移除雨滴
+        };
+    
+        // 雨效應
+        const rainEffect = () => {
+            clearInterval(rainInterval);
+            clearTimeout(rainTimeout);
+            rainInterval = setInterval(createRainDrop, 100); // 每100毫秒創建一個新雨滴
+    
+            rainTimeout = setTimeout(() => {
+                clearInterval(rainInterval);
+                showRainbow();
+            }, 5000); // 5秒後停止下雨
+        };
+    
+        // 顯示彩虹
+        const showRainbow = () => {
+            arcs.forEach(arc => {
+                arc.style.animation = 'rainbowFade 3s forwards';
+                arc.style.opacity = '0.5';
+            });
+    
+            setTimeout(() => {
+                arcs.forEach(arc => {
+                    arc.style.opacity = '0';
+                });
+                sunshineEffect();
+            }, 3000); // 3秒後停止彩虹效果
+        };
+    
+        // 陽光效果
+        const sunshineEffect = () => {
+            setTimeout(() => {
+                rainEffect();
+            }, 10000); // 10秒的陽光後開始下雨
+        };
+    
+        let rainInterval;
+        let rainTimeout;
+    
+        rainEffect();
     </script>
+    
 </body>
 
 </html>
