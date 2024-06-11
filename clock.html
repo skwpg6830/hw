@@ -407,76 +407,86 @@
 
     <script>
         const elHour = document.getElementById('hour');
-        const elMinute = document.getElementById('minute');
-        const elSecond = document.getElementById('second');
-        const elText = document.getElementById('text');
-        const arcs = document.querySelectorAll('.arc');
-    
-        const clock = () => {
-            const date = new Date();
-            const hour = date.getHours();
-            const minute = date.getMinutes();
-            const second = date.getSeconds();
-            elHour.style.transform = `rotate(${hour * 30 + 90}deg)`;
-            elMinute.style.transform = `rotate(${minute * 6 + 90}deg)`;
-            elSecond.style.transform = `rotate(${second * 6 + 90}deg)`;
-            elText.innerText = `${hour.toString().padStart(2, '0')}:${minute.toString().padStart(2, '0')}:${second.toString().padStart(2, '0')}`;
-        };
-    
-        setInterval(clock, 1000);
-        clock();
-    
-        // 創建雨滴
-        const createRainDrop = () => {
-            const drop = document.createElement('div');
-            drop.className = 'raindrop';
-            drop.style.left = Math.random() * 100 + 'vw';
-            drop.style.animationDuration = 2 + Math.random() * 2 + 's';
-            document.body.appendChild(drop);
-    
-            setTimeout(() => {
-                drop.remove();
-            }, 4000); // 動畫結束後移除雨滴
-        };
-    
-        // 雨效應
-        const rainEffect = () => {
-            clearInterval(rainInterval);
-            clearTimeout(rainTimeout);
-            rainInterval = setInterval(createRainDrop, 100); // 每100毫秒創建一個新雨滴
-    
-            rainTimeout = setTimeout(() => {
-                clearInterval(rainInterval);
-                showRainbow();
-            }, 5000); // 5秒後停止下雨
-        };
-    
-        // 顯示彩虹
-        const showRainbow = () => {
-            arcs.forEach(arc => {
-                arc.style.animation = 'rainbowFade 3s forwards';
-                arc.style.opacity = '0.5';
-            });
-    
-            setTimeout(() => {
-                arcs.forEach(arc => {
-                    arc.style.opacity = '0';
-                });
-                sunshineEffect();
-            }, 3000); // 3秒後停止彩虹效果
-        };
-    
-        // 陽光效果
-        const sunshineEffect = () => {
-            setTimeout(() => {
-                rainEffect();
-            }, 10000); // 10秒的陽光後開始下雨
-        };
-    
-        let rainInterval;
-        let rainTimeout;
-    
+const elMinute = document.getElementById('minute');
+const elSecond = document.getElementById('second');
+const elText = document.getElementById('text');
+const arcs = document.querySelectorAll('.arc');
+
+const clock = () => {
+    const date = new Date();
+    const hour = date.getHours();
+    const minute = date.getMinutes();
+    const second = date.getSeconds();
+    elHour.style.transform = `rotate(${hour * 30 + 90}deg)`;
+    elMinute.style.transform = `rotate(${minute * 6 + 90}deg)`;
+    elSecond.style.transform = `rotate(${second * 6 + 90}deg)`;
+    elText.innerText = `${hour.toString().padStart(2, '0')}:${minute.toString().padStart(2, '0')}:${second.toString().padStart(2, '0')}`;
+};
+
+setInterval(clock, 1000);
+clock();
+
+// 創建雨滴
+const createRainDrop = () => {
+    const drop = document.createElement('div');
+    drop.className = 'raindrop';
+    drop.style.left = Math.random() * 100 + 'vw';
+    drop.style.animationDuration = 2 + Math.random() * 2 + 's';
+    document.body.appendChild(drop);
+
+    setTimeout(() => {
+        drop.remove();
+    }, 4000); // 動畫结束後移除雨滴
+};
+
+// 雨滴效果
+const rainEffect = () => {
+    clearInterval(rainInterval);
+    clearTimeout(rainTimeout);
+    rainInterval = setInterval(createRainDrop, 100); // 每100毫秒创建一個雨滴
+    removeRainbow(); // 開始下雨时關閉彩虹
+
+    rainTimeout = setTimeout(() => {
+        clearInterval(rainInterval);
+        showRainbow(); // 停止下雨後顯示彩虹
+    }, 5000); // 5秒後停止下雨
+};
+
+// 显示彩虹
+const showRainbow = () => {
+    arcs.forEach(arc => {
+        arc.style.animation = 'rainbowFade 3s forwards';
+        arc.style.opacity = '0.5';
+    });
+
+    setTimeout(() => {
+        arcs.forEach(arc => {
+            arc.style.opacity = '0';
+        });
+        sunshineEffect();
+    }, 3000); // 3秒後停止彩虹效果
+};
+
+// 關閉彩虹
+const removeRainbow = () => {
+    arcs.forEach(arc => {
+        arc.style.opacity = '0';
+        arc.style.animation = '';
+    });
+};
+
+// 陽光效果
+const sunshineEffect = () => {
+    setTimeout(() => {
         rainEffect();
+    }, 10000); // 10秒的陽光後开始下雨
+};
+
+let rainInterval;
+let rainTimeout;
+
+rainEffect();
+
     </script>
     
 </body>
