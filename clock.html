@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Clock with Rain Effect</title>
+    <title>時鐘</title>
     <style>
         body {
             background: url(./clock/背景.jpg);
@@ -42,7 +42,7 @@
             }
         }
 
-        /* 其他現有樣式 */
+        /* 彩虹 */
         .arc {
             position: relative;
             width: 180%;
@@ -443,8 +443,8 @@ const createRainDrop = () => {
 const rainEffect = () => {
     clearInterval(rainInterval);
     clearTimeout(rainTimeout);
-    rainInterval = setInterval(createRainDrop, 100); // 每100毫秒创建一個雨滴
-    removeRainbow(); // 開始下雨时關閉彩虹
+    rainInterval = setInterval(createRainDrop, 100); // 每100毫秒創建一個雨滴
+    removeRainbow(); // 開始下雨時關閉彩虹
 
     rainTimeout = setTimeout(() => {
         clearInterval(rainInterval);
@@ -452,7 +452,7 @@ const rainEffect = () => {
     }, 5000); // 5秒後停止下雨
 };
 
-// 显示彩虹
+// 顯示彩虹
 const showRainbow = () => {
     arcs.forEach(arc => {
         arc.style.animation = 'rainbowFade 3s forwards';
@@ -479,7 +479,7 @@ const removeRainbow = () => {
 const sunshineEffect = () => {
     setTimeout(() => {
         rainEffect();
-    }, 10000); // 10秒的陽光後开始下雨
+    }, 10000); // 10秒的陽光後開始下雨
 };
 
 let rainInterval;
